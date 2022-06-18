@@ -1,0 +1,42 @@
+---
+title: "Untitled"
+author: "Ran Linsheng"
+date: '2022-06-14'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(superml)
+df<- read.csv("ONLINE EDUCATION SYSTEM REVIEW.csv")
+
+head(df)
+
+```
+
+```{r}
+ggplot() +
+      geom_violin(aes(x =Performance.in.online , y = Time.spent.on.social.media..Hours., 
+                      fill = Do.elderly.people.monitor.you.),trim=FALSE) +
+      labs(x = 'Performance.in.online', y = "Time.spent.on.social.media..Hours.") +
+      ggtitle("Performance in online ~ Time spent on socialmedia Hours") +
+      theme_bw() +
+      theme(axis.text.x = element_text(face = 'bold', size = 10),
+            axis.text.y = element_text(face = 'bold', size = 10))
+
+
+```
+
+```{r}
+After <- df$Performance.in.online
+Before <- strtoi(substr(df$Average.marks.scored.before.pandemic.in.traditional.classroom,1,1))
+plot(x=Before, y=After, xlab = "Performance Before Pandemic", ylab = "Performance During Pandemic", xlim = c(1,10), ylim = c(1,10), main = "Comparison of Education Performance Before and During Pandemic", pch=19)
+lines(x=Before, y=Before, col="green", lwd=2.0)
+```
+

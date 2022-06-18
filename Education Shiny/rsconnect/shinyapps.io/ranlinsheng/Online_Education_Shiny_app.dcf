@@ -1,0 +1,13 @@
+name: Online_Education_Shiny_app
+title: Online_Education_Shiny_app
+username:
+account: ranlinsheng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6269177
+bundleId: 5889467
+url: https://ranlinsheng.shinyapps.io/Online_Education_Shiny_app/
+when: 1652151632.44535
+lastSyncTime: 1652151632.44535
+asMultiple: FALSE
+asStatic: FALSE
