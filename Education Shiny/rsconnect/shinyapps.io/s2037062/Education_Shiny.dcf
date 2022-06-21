@@ -1,0 +1,14 @@
+name: Education_Shiny
+title: Education_Shiny
+username:
+account: s2037062
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6520612
+bundleId: 6025980
+url: https://s2037062.shinyapps.io/Education_Shiny/
+when: 1655776165.24513
+lastSyncTime: 1655776165.24513
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: chart.Rmd

@@ -1,0 +1,14 @@
+name: wqd7001group2_8
+title: wqd7001group2_8
+username:
+account: ranlinsheng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6520506
+bundleId: 6025453
+url: https://ranlinsheng.shinyapps.io/wqd7001group2_8/
+when: 1655757949.5966
+lastSyncTime: 1655757949.5966
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: chart.Rmd

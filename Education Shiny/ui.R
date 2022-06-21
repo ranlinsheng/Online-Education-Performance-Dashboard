@@ -2,10 +2,9 @@ library(ggplot2)
 library(tidyverse)
 library(shiny)
 library(shinydashboard)
-library(tidyverse)
-library(DT)
 library(shinythemes)
-
+library(DT)
+library(dashboardthemes)
 df=read.csv("Data/ONLINE EDUCATION SYSTEM REVIEW.csv",stringsAsFactors = TRUE)
 
 df$Gender<- as.factor(df$Gender)
@@ -33,13 +32,13 @@ ui <- shinyUI(dashboardPage( skin = 'blue',
                                  menuItem(text = "Overview", tabName="home", icon = icon("graduation-cap")),
                                  
                                  #second menu item 
-                                 menuItem(text = "performance", tabName="a_tab", icon = icon("bar-chart")),
+                                 menuItem(text = "performance", tabName="a_tab", icon = icon("chart-bar")),
                                  
                                  #third menu item
-                                 menuItem(text = "Box and Whisker Plots", tabName="chart", icon = icon("bar-chart")),
+                                 menuItem(text = "Economic", tabName="E_chart", icon = icon("chart-bar")),
                                  
                                  #fourth menu item
-                                 menuItem(text = "Demographics", tabName="demog", icon = icon("address-book")),
+                                 menuItem(text = "Personal", tabName="P_chart", icon = icon("address-book")),
                                  
                                  #about data item
                                  menuItem(text = "About Data", tabName="about", icon = icon("table"))
@@ -49,7 +48,9 @@ ui <- shinyUI(dashboardPage( skin = 'blue',
                                
                              ),
                              dashboardBody(
-                               
+                               shinyDashboardThemes(
+                                theme = "purple_gradient"
+                              ),
                                tabItems(
                                  #the Overview tab
                                  tabItem('home',
@@ -93,7 +94,7 @@ ui <- shinyUI(dashboardPage( skin = 'blue',
                                              br(),
                                              selectInput("mentor","Having a mentor",choices=mentor),
                                              selectInput("gender","Gender",choices=Gender),
-                                             actionButton("plot","Click")
+                                             actionButton("plot","plot")
                                            ),
                                            
                                            mainPanel(
@@ -111,60 +112,56 @@ ui <- shinyUI(dashboardPage( skin = 'blue',
                                          mainPanel(align = 'Center',
                                                    # h1('Data', style = "font-size:80px;" ),
                                                    br(),
-                                                   img(src='UM LOGO.png', width = 180, height = 60, align = 'Center'),
+                                                   img(src='um_logo.png', width = 360, height = 120, align = 'Center'),
                                                    br(),
                                                    br(),
                                                    br(),
                                                    p("Hi!!!This WQD 7001 group project.\n", style = "font-size:29px;"),
                                                    br(),
-                                                   p("Our team members.\n", style = "font-size:20px;"),
+                                                   p("Welcome to our shiny app！！！ Here you will find out about student performance in online education",style = "font-size:24px;"),
+                                                   br(),
+                                                   p("Our team members: \n", style = "font-size:20px;"),
                                                    br(),
                                                    img(src='Team.png', width = 960, height = 260, align = 'Center'),
                                                    br(),
                                                    tags$a(href="https://www.kaggle.com/datasets/sujaradha/online-education-system-review?select=ONLINE+EDUCATION+SYSTEM+REVIEW.csv", "For the Data"),
                                                    br(),
-                                                   tags$a(href="https://www.kaggle.com/datasets/sujaradha/online-education-system-review?select=ONLINE+EDUCATION+SYSTEM+REVIEW.csv", "GitHub"),
+                                                   tags$a(href="https://github.com/ranlinsheng/Online-Performance-Dashboard", "GitHub"),
                                                    br(),
 
                                          )),
                                  
                                  
-                                 #the regression tab
+                                 #the Economic tab
                    
-                                 tabItem('chart',
-                                         titlePanel("Box and Whisker Plots"),
-                                         sidebarLayout(
-                                           sidebarPanel(
-                                             
-                                             
-                                             selectInput("indepvar", label = h3("Explanatory variable"),
-                                                         choices = list("Economic status" = 'Economic.status' ,
-                                                                        'Satisifaction about online education'='Your.level.of.satisfaction.in.Online.Education',
-                                                                        
-                                                                        
-                                                                        'Group studies'='Engaged.in.group.studies.'
-                                                                        
-                                                                        
-                                                         ), selected = 1)
+                                 tabItem('E_chart',
+                                         fluidRow(
+                                           box(
+                                             title = "Student Performance Online vs Economic status" , width = 12
+                                             ,status = "primary"
+                                             ,solidHeader = FALSE 
+                                             ,collapsible = TRUE 
+                                             ,plotOutput("plot5", height = "300px")
                                            ),
                                            
-                                           mainPanel(
-                                             plotOutput("scatterplot"), # Plot
-                                             
-                                             verbatimTextOutput("summary")) # Regression output
-                                           
-                                           
+                                           box(
+                                             title = "Student Performance Online vs Typy of Device",width = 12
+                                             ,status = "primary"
+                                             ,solidHeader = FALSE 
+                                             ,collapsible = TRUE 
+                                             ,plotOutput("plot6", height = "300px")
+                                           )
                                          )
                                          
                                  ),
                                  
                                  
-                                 #demographics tab
-                                 tabItem('demog',
-                                         titlePanel("Demographics Barchart"),
+                                 #Personal tab
+                                 tabItem('P_chart',
+                                         titlePanel("Personal Barchart"),
                                          sidebarLayout(
                                            sidebarPanel(
-                                             p(" To understand demographic data of students causal effect we can use  interactive barplot"),
+                                             p(" To understand distribution of online performance related to personal information"),
                                              br(),
                                              
                                              selectInput("Gender","Gender",choices= Gender),
@@ -180,7 +177,6 @@ ui <- shinyUI(dashboardPage( skin = 'blue',
                                            mainPanel(
                                              h5(strong("Click Plot to see visual")),
                                              plotOutput("dPlot"),
-                                             p("* Certain combinations are unavailable due to the shallowness of the data.", style =  "font-size:11px;")
                                            )
                                            
                                          )
